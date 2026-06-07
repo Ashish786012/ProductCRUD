@@ -1,0 +1,17 @@
+# Build folders
+bin/
+obj/
+
+# Visual Studio
+.vs/
+*.user
+*.suo
+
+# ReSharper
+_ReSharper*/
+
+# NuGet packages (if desired)
+packages/
+
+# Logs
+*.log

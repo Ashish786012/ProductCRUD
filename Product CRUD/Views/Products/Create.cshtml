@@ -1,0 +1,75 @@
+@* =============================================
+   File: Views/Products/Create.cshtml
+   Framework: ASP.NET Core MVC
+   Key differences from MVC 5:
+     - <form asp-action="Create"> replaces Html.BeginForm()
+     - <input asp-for="Name"> replaces Html.TextBoxFor()
+     - <span asp-validation-for="Name"> replaces Html.ValidationMessageFor()
+     - @Html.AntiForgeryToken() is automatic with asp-action forms
+   ============================================= *@
+@model ProductCRUD.Models.Product
+
+@{
+    ViewData["Title"] = "Add Product";
+}
+
+<div class="row justify-content-center">
+    <div class="col-md-6">
+        <div class="card shadow-sm">
+            <div class="card-header bg-primary text-white">
+                <h5 class="mb-0"><i class="bi bi-plus-circle me-2"></i>Add New Product</h5>
+            </div>
+            <div class="card-body">
+
+                @* asp-action Tag Helper replaces Html.BeginForm()
+                   Anti-forgery token is included automatically *@
+                <form asp-action="Create">
+
+                    @* Validation Summary — shows all errors at once *@
+                    <div asp-validation-summary="ModelOnly" class="alert alert-danger" style="display:none"></div>
+
+                    @* ---- Name ---- *@
+                    <div class="mb-3">
+                        <label asp-for="Name" class="form-label fw-semibold"></label>
+                        <input asp-for="Name" class="form-control" placeholder="e.g. Wireless Mouse" />
+                        <span asp-validation-for="Name" class="text-danger small"></span>
+                    </div>
+
+                    @* ---- Price ---- *@
+                    <div class="mb-3">
+                        <label asp-for="Price" class="form-label fw-semibold"></label>
+                        <div class="input-group">
+                            <span class="input-group-text">₹</span>
+                            <input asp-for="Price" class="form-control" placeholder="0.00"
+                                   type="number" step="0.01" min="0" />
+                        </div>
+                        <span asp-validation-for="Price" class="text-danger small"></span>
+                    </div>
+
+                    @* ---- Quantity ---- *@
+                    <div class="mb-4">
+                        <label asp-for="Quantity" class="form-label fw-semibold"></label>
+                        <input asp-for="Quantity" class="form-control"
+                               type="number" min="0" placeholder="0" />
+                        <span asp-validation-for="Quantity" class="text-danger small"></span>
+                    </div>
+
+                    <div class="d-flex gap-2">
+                        <button type="submit" class="btn btn-primary">
+                            <i class="bi bi-check-circle me-1"></i>Save Product
+                        </button>
+                        <a asp-action="Index" class="btn btn-secondary">
+                            <i class="bi bi-arrow-left me-1"></i>Cancel
+                        </a>
+                    </div>
+
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+@* Client-side validation scripts (reads data-val-* attributes from model annotations) *@
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
