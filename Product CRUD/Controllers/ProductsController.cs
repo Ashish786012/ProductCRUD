@@ -125,10 +125,6 @@ namespace ProductCRUD.Controllers
             return RedirectToAction(nameof(Index));
         }
 
-        //public IActionResult Search(string query)
-        //{
-        //    var products = _repo.Search(query);
-        //    return View("Index", products);
-        //}
+     
     }
 }
